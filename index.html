@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutriMind | Smart AI Food Assistant</title>
+  <meta name="description" content="NutriMind is your personal AI-powered food decision assistant.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Firebase Compat V10 (Deferred for performance) -->
+  <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- App Container -->
+  <div id="app-container">
+    
+    <!-- Auth View -->
+    <div id="auth-view" class="hidden">
+      <div class="auth-card glass">
+        <h1 class="gradient-text">NutriMind</h1>
+        <p>Your intelligent food decision assistant.</p>
+        <form id="login-form">
+          <input type="email" id="email" placeholder="Email" required>
+          <input type="password" id="password" placeholder="Password" required>
+          <button type="submit" class="btn btn-primary" id="login-btn">
+            <span class="btn-text">Sign In</span>
+            <div class="loader"></div>
+          </button>
+        </form>
+        <button type="button" class="btn btn-secondary" id="demo-login-btn" style="margin-top: 10px;">
+          Try Demo Mode
+        </button>
+      </div>
+    </div>
+
+    <!-- Dashboard View -->
+    <div id="dashboard-view" class="hidden">
+      
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-logo gradient-text">NutriMind</div>
+        <nav>
+          <a class="nav-item active">
+            <span>🏠</span> Dashboard
+          </a>
+          <a class="nav-item">
+            <span>📊</span> Insights
+          </a>
+          <a class="nav-item">
+            <span>🥗</span> Meal Log
+          </a>
+          <a class="nav-item">
+            <span>⚙️</span> Settings
+          </a>
+        </nav>
+        <div class="sidebar-spacer"></div>
+        <button id="logout-btn" class="btn btn-secondary" style="width: 100%;">Logout</button>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        
+        <header class="header">
+          <div>
+            <h2 id="greeting-text">Good morning, Numi!</h2>
+            <p style="color: var(--text-muted); margin-top: 5px;" id="motivational-tip">Ready to make healthy choices today?</p>
+          </div>
+          <div class="user-profile">
+            <span id="user-name">User</span>
+            <div class="avatar" id="user-avatar">U</div>
+          </div>
+        </header>
+
+        <!-- Metrics Grid -->
+        <div class="dashboard-grid">
+          <div class="metric-card glass">
+            <div class="metric-title">Calories Left</div>
+            <div class="metric-value"><span id="cal-left">1420</span> <span>kcal</span></div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="cal-progress" style="width: 30%;"></div>
+            </div>
+          </div>
+          <div class="metric-card glass">
+            <div class="metric-title">Protein Intake</div>
+            <div class="metric-value"><span id="protein-intake">45</span> <span>/ 120g</span></div>
+            <div class="progress-bar">
+              <div class="progress-fill secondary" id="protein-progress" style="width: 38%;"></div>
+            </div>
+          </div>
+          <div class="metric-card glass">
+            <div class="metric-title">Health Score</div>
+            <div class="metric-value gradient-text"><span id="health-score">85</span><span>/100</span></div>
+            <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: auto;">Excellent streak! 🔥</div>
+          </div>
+        </div>
+
+        <!-- AI Food Analyzer -->
+        <div class="upload-section glass" id="upload-zone">
+          <input type="file" id="food-image" accept="image/*" class="hidden">
+          <div class="upload-icon">📸</div>
+          <h3>Snap or upload a meal</h3>
+          <p style="color: var(--text-muted); margin-top: 5px;">Numi AI will analyze nutrition and log it.</p>
+          <div class="loader" id="upload-loader" style="margin-top: 15px;"></div>
+          <div id="upload-result" style="margin-top: 15px; display: none; color: var(--primary); font-weight: 500;"></div>
+        </div>
+
+        <!-- Smart Recommendations -->
+        <div class="section-title">
+          <span>✨</span> Smart Recommendations for <span id="meal-period-label">Lunch</span>
+        </div>
+        <div class="rec-grid" id="recommendations-grid">
+          <!-- Recommendations injected via JS -->
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
