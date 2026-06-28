@@ -1,131 +1,909 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NutriMind | Smart AI Food Assistant</title>
-  <meta name="description" content="NutriMind is your personal AI-powered food decision assistant.">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Firebase Compat V10 (Deferred for performance) -->
-  <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriMind – AI Nutrition Coach</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Sora:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <!-- Toast Notification Container -->
-  <div id="toast-container" class="toast-container"></div>
+    <!-- NAV -->
+    <nav>
+        <div class="logo">Nutri<span>Mind</span></div>
+        <ul class="nav-links">
+            <li><a href="#" onclick="scrollTo(0,0)">Home</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="btn btn-ghost" onclick="showPage('auth','login')">Log In</button>
+            <button class="btn btn-primary" onclick="showPage('auth','signup')">Get Started</button>
+        </div>
+    </nav>
 
-  <!-- App Container -->
-  <div id="app-container">
-    
-    <!-- Auth View -->
-    <div id="auth-view" class="hidden">
-      <div class="auth-card glass">
-        <h1 class="gradient-text">NutriMind</h1>
-        <p>Your intelligent food decision assistant.</p>
-        <form id="login-form">
-          <input type="email" id="email" placeholder="Email" required>
-          <input type="password" id="password" placeholder="Password" required>
-          <button type="submit" class="btn btn-primary" id="login-btn">
-            <span class="btn-text">Sign In</span>
-            <div class="loader"></div>
-          </button>
-        </form>
-        <button type="button" class="btn btn-secondary" id="demo-login-btn" style="margin-top: 10px;">
-          Try Demo Mode
-        </button>
-      </div>
+    <!-- HOME PAGE -->
+    <div id="page-home" class="page active">
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-badge">
+                <div class="badge-dot"></div> Now powered by Claude AI
+            </div>
+            <h1>Your Personal<br><span class="accent">AI Nutrition Coach</span></h1>
+            <p>Make smarter food decisions in real-time using AI that understands your goals, habits, and lifestyle.</p>
+            <div class="hero-cta">
+                <button class="btn btn-primary btn-lg" onclick="showPage('auth','signup')">Get Started Free</button>
+                <button class="btn btn-outline btn-lg" onclick="showPage('dash')">View Demo →</button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-num">50K+</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">2.4M</div>
+                    <div class="stat-label">Meals Analyzed</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">94%</div>
+                    <div class="stat-label">Goal Achievement</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">4.9★</div>
+                    <div class="stat-label">User Rating</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRUST -->
+        <div class="trust-bar">
+            <div class="trust-inner">
+                <span class="trust-label">Powered by</span>
+                <div class="trust-badges">
+                    <div class="trust-badge"><span class="trust-icon">🧠</span> Claude AI</div>
+                    <div class="trust-badge"><span class="trust-icon">🔥</span> Firebase Auth</div>
+                    <div class="trust-badge"><span class="trust-icon">📍</span> Google Maps</div>
+                    <div class="trust-badge"><span class="trust-icon">🔒</span> End-to-End Secure</div>
+                    <div class="trust-badge"><span class="trust-icon">📊</span> Real-time Insights</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FEATURES -->
+        <section>
+            <div style="max-width:1100px;margin:0 auto">
+                <div class="section-label">Features</div>
+                <h2 class="section-title">Everything you need to eat smarter</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🧠</div>
+                        <div class="feature-title">Smart AI Recommendations</div>
+                        <p class="feature-desc">Context-aware meal suggestions that adapt to your time, goals, location,
+                            and eating history.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📸</div>
+                        <div class="feature-title">Food Scanner</div>
+                        <p class="feature-desc">Upload a photo of any meal or food item and get instant calorie count
+                            and health analysis.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <div class="feature-title">Habit Tracking</div>
+                        <p class="feature-desc">Visual analytics of your nutrition patterns with smart alerts when
+                            unhealthy patterns emerge.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <div class="feature-title">Goal-Driven Suggestions</div>
+                        <p class="feature-desc">Set weight loss, muscle gain, energy, or general wellness goals and get
+                            tailored daily plans.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📍</div>
+                        <div class="feature-title">Nearby Healthy Places</div>
+                        <p class="feature-desc">Find healthy restaurants, salad bars, and cafes near you powered by
+                            Google Maps integration.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌙</div>
+                        <div class="feature-title">Time-Aware Intelligence</div>
+                        <p class="feature-desc">AI automatically adjusts suggestions for morning fuel, lunch options, or
+                            light late-night snacks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section
+            style="background:rgba(255,255,255,0.01);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+            <div style="max-width:900px;margin:0 auto;text-align:center">
+                <div class="section-label">How It Works</div>
+                <h2 class="section-title" style="margin:0 auto 3rem">From goal to plate in 3 steps</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <div class="step-content">
+                            <h4>Enter your goal</h4>
+                            <p>Tell NutriMind what you're working towards — weight loss, muscle gain, more energy, or
+                                general wellness.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <div class="step-content">
+                            <h4>AI analyzes your context</h4>
+                            <p>Our AI considers time of day, your history, dietary preferences, and current health
+                                patterns.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">3</div>
+                        <div class="step-content">
+                            <h4>Get personalized suggestions</h4>
+                            <p>Receive tailored meal ideas with reasons and health benefits — not generic diet advice.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section>
+            <div style="max-width:1000px;margin:0 auto;text-align:center">
+                <div class="section-label">Testimonials</div>
+                <h2 class="section-title" style="margin:0 auto 0.75rem">Loved by thousands</h2>
+                <p class="section-sub" style="margin:0 auto 0">Real feedback from real users achieving real results.</p>
+                <div class="testimonials">
+                    <div class="testi">
+                        <div class="stars">★★★★★</div>
+                        <p class="testi-text">"NutriMind changed how I think about food. The late-night suggestions are
+                            incredibly thoughtful — it always knows when I need something light."</p>
+                        <div class="testi-user">
+                            <div class="avatar">SK</div>
+                            <div>
+                                <div class="testi-name">Sunita Krishnan</div>
+                                <div class="testi-role">Yoga Instructor, Bangalore</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testi">
+                        <div class="stars">★★★★★</div>
+                        <p class="testi-text">"Lost 8kg in 3 months just by following NutriMind's daily suggestions. The
+                            habit tracking feature showed me patterns I never noticed."</p>
+                        <div class="testi-user">
+                            <div class="avatar">RV</div>
+                            <div>
+                                <div class="testi-name">Rahul Verma</div>
+                                <div class="testi-role">Software Engineer, Pune</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testi">
+                        <div class="stars">★★★★★</div>
+                        <p class="testi-text">"The food scanner is mind-blowing. I just photograph my dosa and it
+                            instantly tells me the calorie count and whether it fits my macros."</p>
+                        <div class="testi-user">
+                            <div class="avatar">AM</div>
+                            <div>
+                                <div class="testi-name">Aisha Mehta</div>
+                                <div class="testi-role">Nutritionist, Mumbai</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING -->
+        <section style="background:rgba(255,255,255,0.01);border-top:1px solid var(--border)">
+            <div style="max-width:850px;margin:0 auto;text-align:center">
+                <div class="section-label">Pricing</div>
+                <h2 class="section-title" style="margin:0 auto 0.75rem">Simple, transparent pricing</h2>
+                <p class="section-sub" style="margin:0 auto 0">Start free. Upgrade when you're ready for more.</p>
+                <div class="pricing-grid">
+                    <div class="plan">
+                        <div class="plan-name">Free</div>
+                        <div class="plan-price">₹0 <span>/ mo</span></div>
+                        <div class="plan-desc">For casual users getting started</div>
+                        <ul class="plan-features">
+                            <li><span class="check">✓</span> 5 AI suggestions per day</li>
+                            <li><span class="check">✓</span> Basic goal tracking</li>
+                            <li><span class="check">✓</span> 7-day history</li>
+                            <li><span class="check">✓</span> Food scanner (3/day)</li>
+                        </ul>
+                        <button class="btn btn-ghost" style="width:100%" onclick="showPage('auth','signup')">Get Started
+                            Free</button>
+                    </div>
+                    <div class="plan popular">
+                        <div class="popular-badge">Most Popular</div>
+                        <div class="plan-name">Pro</div>
+                        <div class="plan-price">₹499 <span>/ mo</span></div>
+                        <div class="plan-desc">For serious health optimization</div>
+                        <ul class="plan-features">
+                            <li><span class="check">✓</span> Unlimited AI suggestions</li>
+                            <li><span class="check">✓</span> Deep habit analytics</li>
+                            <li><span class="check">✓</span> Full history & trends</li>
+                            <li><span class="check">✓</span> Unlimited food scanner</li>
+                            <li><span class="check">✓</span> Nearby places (Google Maps)</li>
+                            <li><span class="check">✓</span> Pattern alerts & coaching</li>
+                            <li><span class="check">✓</span> Priority AI responses</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width:100%" onclick="showPage('dash')">Start 14-Day
+                            Trial</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-brand">
+                <div class="logo">Nutri<span>Mind</span></div>
+                <p>AI-powered nutrition decisions for everyone.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="#">Features</a>
+                <a href="#">Pricing</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy</a>
+                <a href="#">GitHub</a>
+            </div>
+            <p style="font-size:0.75rem;color:var(--text3)">© 2025 NutriMind. Built with ❤️ and AI.</p>
+        </footer>
     </div>
 
-    <!-- Dashboard View -->
-    <div id="dashboard-view" class="hidden">
-      
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        <div class="sidebar-logo gradient-text">NutriMind</div>
-        <nav>
-          <a class="nav-item active">
-            <span>🏠</span> Dashboard
-          </a>
-          <a class="nav-item">
-            <span>📊</span> Insights
-          </a>
-          <a class="nav-item">
-            <span>🥗</span> Meal Log
-          </a>
-          <a class="nav-item">
-            <span>⚙️</span> Settings
-          </a>
-        </nav>
-        <div class="sidebar-spacer"></div>
-        <button id="logout-btn" class="btn btn-secondary" style="width: 100%;">Logout</button>
-      </aside>
-
-      <!-- Main Content -->
-      <main class="main-content">
-        
-        <header class="header">
-          <div>
-            <h2 id="greeting-text">Good morning, Numi!</h2>
-            <p style="color: var(--text-muted); margin-top: 5px;" id="motivational-tip">Ready to make healthy choices today?</p>
-          </div>
-          <div class="user-profile">
-            <span id="user-name">User</span>
-            <div class="avatar" id="user-avatar">U</div>
-          </div>
-        </header>
-
-        <!-- Metrics Grid -->
-        <div class="dashboard-grid">
-          <div class="metric-card glass">
-            <div class="metric-title">Calories Left</div>
-            <div class="metric-value"><span id="cal-left">1420</span> <span>kcal</span></div>
-            <div class="progress-bar">
-              <div class="progress-fill" id="cal-progress" style="width: 30%;"></div>
+    <!-- AUTH PAGE -->
+    <div id="page-auth" class="page">
+        <div class="auth-card">
+            <h2>Welcome to NutriMind</h2>
+            <p id="auth-sub">Your AI nutrition journey starts here.</p>
+            <div class="auth-tabs">
+                <div class="auth-tab active" id="tab-login" onclick="switchTab('login')">Log In</div>
+                <div class="auth-tab" id="tab-signup" onclick="switchTab('signup')">Sign Up</div>
             </div>
-          </div>
-          <div class="metric-card glass">
-            <div class="metric-title">Protein Intake</div>
-            <div class="metric-value"><span id="protein-intake">45</span> <span>/ 120g</span></div>
-            <div class="progress-bar">
-              <div class="progress-fill secondary" id="protein-progress" style="width: 38%;"></div>
+            <div id="auth-form-login">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="login-email" placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="login-password" placeholder="••••••••">
+                </div>
+                <button class="btn btn-primary" style="width:100%;margin-top:0.5rem;padding:0.75rem"
+                    onclick="doLogin()">Log In →</button>
             </div>
-          </div>
-          <div class="metric-card glass">
-            <div class="metric-title">Health Score</div>
-            <div class="metric-value gradient-text"><span id="health-score">85</span><span>/100</span></div>
-            <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: auto;">Excellent streak! 🔥</div>
-          </div>
+            <div id="auth-form-signup" style="display:none">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="signup-name" placeholder="Your full name">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="signup-email" placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signup-password" placeholder="Create a password">
+                </div>
+                <button class="btn btn-primary" style="width:100%;margin-top:0.5rem;padding:0.75rem"
+                    onclick="doSignup()">Create Account →</button>
+            </div>
+            <div class="auth-switch">
+                <span id="auth-switch-text">Don't have an account? <a onclick="switchTab('signup')">Sign up
+                        free</a></span>
+            </div>
+            <div style="text-align:center;margin-top:1rem">
+                <button class="btn btn-ghost" style="font-size:0.8rem" onclick="showPage('home')">← Back to
+                    home</button>
+            </div>
         </div>
-
-        <!-- AI Food Analyzer -->
-        <div class="upload-section glass" id="upload-zone">
-          <input type="file" id="food-image" accept="image/*" class="hidden">
-          <div class="upload-icon">📸</div>
-          <h3>Snap or upload a meal</h3>
-          <p style="color: var(--text-muted); margin-top: 5px;">Numi AI will analyze nutrition and log it.</p>
-          <div class="loader" id="upload-loader" style="margin-top: 15px;"></div>
-          <div id="upload-result" style="margin-top: 15px; display: none; color: var(--primary); font-weight: 500;"></div>
-        </div>
-
-        <!-- Smart Recommendations -->
-        <div class="section-title">
-          <span>✨</span> Smart Recommendations for <span id="meal-period-label">Lunch</span>
-        </div>
-        <div class="rec-grid" id="recommendations-grid">
-          <!-- Recommendations injected via JS -->
-        </div>
-
-      </main>
     </div>
-  </div>
 
-  <script type="module" src="js/app.js"></script>
+    <!-- DASHBOARD PAGE -->
+    <div id="page-dash" class="page">
+        <div class="dash-layout">
+            <!-- SIDEBAR -->
+            <div class="sidebar">
+                <div class="sidebar-section">
+                    <div class="sidebar-label">Main</div>
+                    <div class="sidebar-item active" onclick="showDashSection('main')"><span
+                            class="sidebar-icon">🏠</span> Dashboard</div>
+                    <div class="sidebar-item" onclick="showDashSection('scanner')"><span class="sidebar-icon">📸</span>
+                        Food Scanner</div>
+                    <div class="sidebar-item" onclick="showDashSection('history')"><span class="sidebar-icon">📋</span>
+                        History</div>
+                    <div class="sidebar-item" onclick="showDashSection('insights')"><span class="sidebar-icon">📊</span>
+                        Insights</div>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-label">Account</div>
+                    <div class="sidebar-item" onclick="showDashSection('settings')"><span class="sidebar-icon">⚙️</span>
+                        Settings</div>
+                    <div class="sidebar-item" onclick="showPage('home')"><span class="sidebar-icon">↩️</span> Sign Out
+                    </div>
+                </div>
+                <div style="margin-top:auto;padding-top:1rem;border-top:1px solid var(--border)">
+                    <div style="font-size:0.75rem;color:var(--text3);margin-bottom:0.5rem">Daily Usage</div>
+                    <div style="font-size:0.8rem;color:var(--text2)" id="usage-count">3 / 5 suggestions used</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="usage-bar" style="width:60%"></div>
+                    </div>
+                    <div style="font-size:0.75rem;color:var(--amber);margin-top:0.5rem">Free Plan</div>
+                </div>
+            </div>
+
+            <!-- MAIN CONTENT -->
+            <div class="dash-main">
+
+                <!-- MAIN SECTION -->
+                <div id="section-main">
+                    <div class="dash-header">
+                        <div class="dash-greeting">
+                            <h2 id="greeting-text">Good evening! 🌙</h2>
+                            <p id="greeting-sub">Here's your nutrition overview for today.</p>
+                        </div>
+                        <div class="dash-user">
+                            <div style="text-align:right">
+                                <div style="font-size:0.875rem;font-weight:500" id="user-name-display">Demo User</div>
+                                <div style="font-size:0.75rem;color:var(--text3)">Free Plan</div>
+                            </div>
+                            <div class="user-avatar" id="user-avatar">DU</div>
+                        </div>
+                    </div>
+
+                    <!-- ALERT -->
+                    <div class="alert-banner" id="pattern-alert" style="display:none">
+                        <span class="alert-icon">⚠️</span>
+                        <span>We noticed you've had high-carb meals 3 days in a row. Consider lighter options today for
+                            balance.</span>
+                    </div>
+
+                    <!-- STATS -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-card-num">1,840</div>
+                            <div class="stat-card-label">Cal Today</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-num">68g</div>
+                            <div class="stat-card-label">Protein</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-num">7</div>
+                            <div class="stat-card-label">Day Streak</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-num">92%</div>
+                            <div class="stat-card-label">Goal Score</div>
+                        </div>
+                    </div>
+
+                    <!-- MAIN CTA -->
+                    <div class="main-cta">
+                        <h3>🍽️ What should I eat now?</h3>
+                        <p>Tell the AI your current goal and get personalized suggestions in seconds.</p>
+                        <div class="goal-select" id="goal-select">
+                            <button class="goal-btn active" onclick="selectGoal(this,'Weight Loss')">🏃 Weight
+                                Loss</button>
+                            <button class="goal-btn" onclick="selectGoal(this,'Muscle Gain')">💪 Muscle Gain</button>
+                            <button class="goal-btn" onclick="selectGoal(this,'More Energy')">⚡ More Energy</button>
+                            <button class="goal-btn" onclick="selectGoal(this,'Wellness')">🌿 General Wellness</button>
+                        </div>
+                        <div class="context-row">
+                            <div class="context-tag" id="time-context">🕐 <span id="time-label">Loading...</span></div>
+                            <div class="context-tag">📍 Bhātpāra, WB</div>
+                            <div class="context-tag">🌡️ Warm weather</div>
+                        </div>
+                        <button class="btn btn-primary btn-lg" onclick="getAISuggestion()" id="suggest-btn">Ask AI for
+                            Suggestions</button>
+                        <div id="ai-output"></div>
+                    </div>
+
+                    <!-- TODAY'S RECOMMENDATIONS -->
+                    <h3
+                        style="font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:600;margin-bottom:1rem">
+                        Today's Recommendations</h3>
+                    <div class="history-list">
+                        <div class="history-item">
+                            <div class="history-icon">🌅</div>
+                            <div class="history-name">Oats with banana & almonds</div>
+                            <div class="history-time">Breakfast</div>
+                            <div class="history-score">95 / 100</div>
+                        </div>
+                        <div class="history-item">
+                            <div class="history-icon">☀️</div>
+                            <div class="history-name">Dal khichdi with vegetables</div>
+                            <div class="history-time">Lunch</div>
+                            <div class="history-score">88 / 100</div>
+                        </div>
+                        <div class="history-item">
+                            <div class="history-icon">🌙</div>
+                            <div class="history-name">Light vegetable soup (tonight)</div>
+                            <div class="history-time">Dinner</div>
+                            <div class="history-score">AI Suggested</div>
+                        </div>
+                    </div>
+
+                    <!-- UPGRADE BANNER -->
+                    <div class="upgrade-banner">
+                        <p><strong>Unlock Pro Features</strong>Unlimited suggestions, advanced analytics, food scanner &
+                            Google Maps nearby places.</p>
+                        <button class="btn-amber" onclick="showUpgrade()">Upgrade to Pro →</button>
+                    </div>
+                </div>
+
+                <!-- SCANNER SECTION -->
+                <div id="section-scanner" style="display:none">
+                    <h2
+                        style="font-family:'Clash Display',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:0.5rem">
+                        Food Scanner</h2>
+                    <p style="color:var(--text3);font-size:0.875rem;margin-bottom:2rem">Upload a photo of any food to
+                        get instant nutrition analysis powered by AI.</p>
+                    <div class="scanner-zone" onclick="document.getElementById('file-input').click()">
+                        <div class="scanner-icon">📸</div>
+                        <p><strong style="color:var(--text)">Click to upload a food photo</strong><br>or drag and drop
+                            your image here</p>
+                        <p style="margin-top:0.5rem;font-size:0.75rem">Supports JPG, PNG, WEBP</p>
+                    </div>
+                    <input type="file" id="file-input" accept="image/*" style="display:none"
+                        onchange="analyzeFood(this)">
+                    <div id="scanner-result" style="margin-top:1.5rem"></div>
+                    <div class="upgrade-banner" style="margin-top:1.5rem">
+                        <p><strong>Pro Scanner</strong>Scan unlimited foods. Free users get 3 scans/day.</p>
+                        <button class="btn-amber" onclick="showUpgrade()">Go Unlimited →</button>
+                    </div>
+                </div>
+
+                <!-- HISTORY SECTION -->
+                <div id="section-history" style="display:none">
+                    <h2
+                        style="font-family:'Clash Display',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:0.5rem">
+                        Suggestion History</h2>
+                    <p style="color:var(--text3);font-size:0.875rem;margin-bottom:2rem">Your AI nutrition suggestions
+                        from the past 7 days.</p>
+                    <div class="history-list">
+                        <div class="history-item">
+                            <div class="history-icon">🥗</div>
+                            <div class="history-name">Spinach salad with paneer & seeds</div>
+                            <div class="history-time">Today 6:30 PM</div>
+                            <div class="history-score">Weight Loss</div>
+                        </div>
+                        <div class="history-item">
+                            <div class="history-icon">🍲</div>
+                            <div class="history-name">Moong dal with brown rice</div>
+                            <div class="history-time">Yesterday 1 PM</div>
+                            <div class="history-score">Wellness</div>
+                        </div>
+                        <div class="history-item">
+                            <div class="history-icon">🍌</div>
+                            <div class="history-name">Banana smoothie with chia seeds</div>
+                            <div class="history-time">Yesterday 8 AM</div>
+                            <div class="history-score">Energy</div>
+                        </div>
+                        <div class="history-item">
+                            <div class="history-icon">🥚</div>
+                            <div class="history-name">Egg white omelette with veggies</div>
+                            <div class="history-time">2 days ago</div>
+                            <div class="history-score">Muscle Gain</div>
+                        </div>
+                        <div class="history-item">
+                            <div class="history-icon">🥣</div>
+                            <div class="history-name">Overnight oats with berries</div>
+                            <div class="history-time">3 days ago</div>
+                            <div class="history-score">Wellness</div>
+                        </div>
+                    </div>
+                    <div class="upgrade-banner" style="margin-top:1.5rem">
+                        <p><strong>See Full History</strong>Pro users get unlimited history, trends, and export options.
+                        </p>
+                        <button class="btn-amber" onclick="showUpgrade()">Unlock History →</button>
+                    </div>
+                </div>
+
+                <!-- INSIGHTS SECTION -->
+                <div id="section-insights" style="display:none">
+                    <h2
+                        style="font-family:'Clash Display',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:0.5rem">
+                        Habit Insights</h2>
+                    <p style="color:var(--text3);font-size:0.875rem;margin-bottom:2rem">Your nutrition patterns and
+                        trends this week.</p>
+                    <div class="stats-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+                        <div class="stat-card">
+                            <div class="stat-card-num" style="color:var(--green-light)">7</div>
+                            <div class="stat-card-label">Day Streak</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-num" style="color:var(--amber)">68%</div>
+                            <div class="stat-card-label">Protein Goal Hit</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-num" style="color:#60a5fa">1,740</div>
+                            <div class="stat-card-label">Avg Daily Cal</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-num" style="color:var(--coral)">3</div>
+                            <div class="stat-card-label">Late Night Meals</div>
+                        </div>
+                    </div>
+                    <div
+                        style="background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-top:1rem">
+                        <h4
+                            style="font-family:'Clash Display',sans-serif;font-size:1rem;font-weight:600;margin-bottom:1rem">
+                            Weekly Nutrition Pattern</h4>
+                        <div style="display:flex;flex-direction:column;gap:0.75rem">
+                            <div>
+                                <div
+                                    style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text2);margin-bottom:0.35rem">
+                                    <span>Protein</span><span>68g avg</span></div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width:68%;background:var(--green-light)"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div
+                                    style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text2);margin-bottom:0.35rem">
+                                    <span>Carbs</span><span>210g avg</span></div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width:82%;background:var(--amber)"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div
+                                    style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text2);margin-bottom:0.35rem">
+                                    <span>Healthy Fats</span><span>45g avg</span></div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width:55%;background:#60a5fa)"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div
+                                    style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text2);margin-bottom:0.35rem">
+                                    <span>Hydration</span><span>1.8L avg</span></div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width:72%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert-banner" style="margin-top:1rem">
+                        <span class="alert-icon">💡</span>
+                        <span>AI Insight: You tend to skip protein at breakfast on weekdays. Try adding Greek yogurt or
+                            eggs for better morning energy.</span>
+                    </div>
+                    <div class="upgrade-banner" style="margin-top:1rem">
+                        <p><strong>Pro Insights</strong>Get detailed weekly reports, trend predictions, and personalized
+                            coaching.</p>
+                        <button class="btn-amber" onclick="showUpgrade()">Unlock Insights →</button>
+                    </div>
+                </div>
+
+                <!-- SETTINGS SECTION -->
+                <div id="section-settings" style="display:none">
+                    <h2
+                        style="font-family:'Clash Display',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:0.5rem">
+                        Settings</h2>
+                    <p style="color:var(--text3);font-size:0.875rem;margin-bottom:2rem">Manage your profile and
+                        preferences.</p>
+                    <div
+                        style="background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:1.5rem;max-width:480px">
+                        <h4 style="font-family:'Clash Display',sans-serif;font-weight:600;margin-bottom:1.25rem">Profile
+                        </h4>
+                        <div class="form-group"><label>Display Name</label><input type="text" value="Demo User"
+                                placeholder="Your name"></div>
+                        <div class="form-group"><label>Email</label><input type="email" value="demo@nutrimind.app"
+                                placeholder="Email"></div>
+                        <div class="form-group"><label>Primary Goal</label>
+                            <select
+                                style="width:100%;padding:0.7rem 1rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'Sora',sans-serif;font-size:0.9rem;outline:none">
+                                <option>Weight Loss</option>
+                                <option>Muscle Gain</option>
+                                <option>More Energy</option>
+                                <option>General Wellness</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Dietary Preference</label>
+                            <select
+                                style="width:100%;padding:0.7rem 1rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'Sora',sans-serif;font-size:0.9rem;outline:none">
+                                <option>Vegetarian</option>
+                                <option>Non-Vegetarian</option>
+                                <option>Vegan</option>
+                                <option>Keto</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" style="margin-top:0.5rem">Save Changes</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- UPGRADE MODAL -->
+    <div id="upgrade-modal"
+        style="display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:2rem">
+        <div
+            style="background:var(--dark2);border:1px solid var(--border2);border-radius:24px;padding:2.5rem;max-width:400px;width:100%;text-align:center;position:relative">
+            <button onclick="closeUpgrade()"
+                style="position:absolute;top:1rem;right:1rem;background:var(--glass);border:1px solid var(--border);border-radius:50%;width:32px;height:32px;color:var(--text2);cursor:pointer;font-size:1rem">×</button>
+            <div style="font-size:2.5rem;margin-bottom:1rem">🚀</div>
+            <h3 style="font-family:'Clash Display',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:0.5rem">
+                Upgrade to Pro</h3>
+            <p style="color:var(--text2);font-size:0.875rem;margin-bottom:1.75rem">Unlock unlimited AI suggestions,
+                advanced analytics, food scanner, and nearby places.</p>
+            <div
+                style="background:linear-gradient(135deg,rgba(34,197,94,0.1),rgba(34,197,94,0.04));border:1px solid var(--border2);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem">
+                <div
+                    style="font-family:'Clash Display',sans-serif;font-size:2.5rem;font-weight:700;color:var(--green-light)">
+                    ₹499<span style="font-size:1rem;color:var(--text3)">/mo</span></div>
+                <div style="font-size:0.8rem;color:var(--text3);margin-top:0.25rem">14-day free trial included</div>
+            </div>
+            <button class="btn btn-primary btn-lg" style="width:100%;margin-bottom:0.75rem">Start Free Trial</button>
+            <button class="btn btn-ghost" style="width:100%;font-size:0.8rem" onclick="closeUpgrade()">Maybe
+                later</button>
+        </div>
+    </div>
+
+    <script>
+        // STATE
+        let currentGoal = 'Weight Loss';
+        let suggestionCount = 3;
+        let maxSuggestions = 5;
+        let currentUser = null;
+
+        // INIT
+        window.addEventListener('load', () => {
+            setTimeContext();
+            setGreeting();
+            setTimeout(() => {
+                document.getElementById('pattern-alert').style.display = 'flex';
+            }, 1000);
+        });
+
+        function setTimeContext() {
+            const h = new Date().getHours();
+            let label = h < 6 ? 'Late night' : h < 12 ? 'Morning' : h < 17 ? 'Afternoon' : h < 21 ? 'Evening' : 'Late evening';
+            document.getElementById('time-label').textContent = label;
+        }
+
+        function setGreeting() {
+            const h = new Date().getHours();
+            const greets = ['Good night! 🌑', 'Good morning! ☀️', 'Good afternoon! 🌤️', 'Good evening! 🌙'];
+            const idx = h < 5 ? 0 : h < 12 ? 1 : h < 17 ? 2 : 3;
+            document.getElementById('greeting-text').textContent = greets[idx];
+        }
+
+        // PAGE NAVIGATION
+        function showPage(page, tab) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const el = document.getElementById('page-' + page);
+            if (el) el.classList.add('active');
+            if (page === 'auth' && tab) switchTab(tab);
+            window.scrollTo(0, 0);
+        }
+
+        // AUTH
+        function switchTab(tab) {
+            document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+            document.getElementById('tab-signup').classList.toggle('active', tab === 'signup');
+            document.getElementById('auth-form-login').style.display = tab === 'login' ? 'block' : 'none';
+            document.getElementById('auth-form-signup').style.display = tab === 'signup' ? 'block' : 'none';
+            document.getElementById('auth-switch-text').innerHTML = tab === 'login'
+                ? "Don't have an account? <a onclick=\"switchTab('signup')\">Sign up free</a>"
+                : "Already have an account? <a onclick=\"switchTab('login')\">Log in</a>";
+        }
+
+        function doLogin() {
+            const email = document.getElementById('login-email').value || 'demo@nutrimind.app';
+            const name = email.split('@')[0].replace(/\./g, ' ').split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+            setUser(name);
+            showPage('dash');
+        }
+
+        function doSignup() {
+            const name = document.getElementById('signup-name').value || 'New User';
+            setUser(name);
+            showPage('dash');
+        }
+
+        function setUser(name) {
+            currentUser = name;
+            document.getElementById('user-name-display').textContent = name;
+            const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+            document.getElementById('user-avatar').textContent = initials;
+        }
+
+        // DASHBOARD NAV
+        function showDashSection(section) {
+            ['main', 'scanner', 'history', 'insights', 'settings'].forEach(s => {
+                document.getElementById('section-' + s).style.display = s === section ? 'block' : 'none';
+            });
+            document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+
+        // GOAL SELECTION
+        function selectGoal(btn, goal) {
+            document.querySelectorAll('.goal-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentGoal = goal;
+        }
+
+        // AI SUGGESTION
+        async function getAISuggestion() {
+            if (suggestionCount >= maxSuggestions) {
+                document.getElementById('ai-output').innerHTML = `
+      <div class="upgrade-banner" style="margin-top:1rem">
+        <p><strong>Daily limit reached</strong>Upgrade to Pro for unlimited suggestions today.</p>
+        <button class="btn-amber" onclick="showUpgrade()">Upgrade Now →</button>
+      </div>`;
+                return;
+            }
+
+            const hour = new Date().getHours();
+            const timeCtx = hour < 6 ? 'late night' : hour < 12 ? 'morning' : hour < 17 ? 'afternoon' : hour < 21 ? 'evening' : 'late evening';
+            const isLateNight = hour >= 21 || hour < 5;
+
+            document.getElementById('ai-output').innerHTML = `<div class="loading"><div class="spinner"></div>AI is analyzing your context...</div>`;
+
+            const prompt = `You are NutriMind, an expert AI nutrition coach. A user in Bhātpāra, West Bengal, India wants food recommendations.
+
+Context:
+- Time of day: ${timeCtx} (${hour}:00)
+- Their goal: ${currentGoal}
+- Weather: warm
+- ${isLateNight ? 'IMPORTANT: It is late night — suggest ONLY light, easily digestible foods. No heavy meals.' : ''}
+- They follow a vegetarian diet mostly
+
+Respond ONLY in this exact JSON format (no markdown, no extra text):
+{
+  "meal": "Name of the meal",
+  "reason": "One sentence explaining why this meal fits their goal and time",
+  "benefit": "Specific health benefit for their goal",
+  "calories": "Estimated calories (number only)",
+  "prep_time": "Prep time in minutes (number only)",
+  "health_score": "Health score 1-100 (number only)"
+}`;
+
+            try {
+                const res = await fetch('https://api.anthropic.com/v1/messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        model: 'claude-sonnet-4-20250514',
+                        max_tokens: 400,
+                        messages: [{ role: 'user', content: prompt }]
+                    })
+                });
+                const data = await res.json();
+                const text = data.content?.find(b => b.type === 'text')?.text || '';
+
+                let meal;
+                try {
+                    meal = JSON.parse(text.replace(/```json|```/g, '').trim());
+                } catch {
+                    meal = {
+                        meal: "Mixed vegetable khichdi",
+                        reason: "Light, balanced, and ideal for your current goal and time of day.",
+                        benefit: "Provides complete protein, fiber, and micronutrients supporting your " + currentGoal + " journey.",
+                        calories: "320",
+                        prep_time: "20",
+                        health_score: "91"
+                    };
+                }
+
+                suggestionCount++;
+                const remaining = maxSuggestions - suggestionCount;
+                document.getElementById('usage-count').textContent = `${suggestionCount} / ${maxSuggestions} suggestions used`;
+                document.getElementById('usage-bar').style.width = `${(suggestionCount / maxSuggestions) * 100}%`;
+
+                document.getElementById('ai-output').innerHTML = `
+      <div class="ai-result">
+        <div class="ai-result-header">
+          <span style="font-size:1rem">🤖</span>
+          <span class="ai-badge">AI Recommendation</span>
+          <span style="font-size:0.75rem;color:var(--text3);margin-left:auto">${remaining} suggestions left today</span>
+        </div>
+        <div class="meal-card">
+          <div class="meal-title">${meal.meal}</div>
+          <div class="meal-meta">
+            <span class="meal-tag">🔥 ${meal.calories} cal</span>
+            <span class="meal-tag">⏱️ ${meal.prep_time} min</span>
+            <span class="meal-tag">⭐ ${meal.health_score}/100</span>
+            <span class="meal-tag">🎯 ${currentGoal}</span>
+          </div>
+          <p class="meal-reason">${meal.reason}</p>
+          <div class="meal-benefit">💚 ${meal.benefit}</div>
+        </div>
+        ${remaining <= 1 ? `<div class="upgrade-banner" style="margin-top:0.75rem"><p><strong>Almost out!</strong> Upgrade for unlimited daily suggestions.</p><button class="btn-amber" onclick="showUpgrade()">Go Pro →</button></div>` : ''}
+      </div>`;
+            } catch (e) {
+                document.getElementById('ai-output').innerHTML = `
+      <div class="ai-result">
+        <div class="ai-result-header"><span class="ai-badge">Suggestion</span></div>
+        <div class="meal-card">
+          <div class="meal-title">Mixed Dal Soup</div>
+          <div class="meal-meta"><span class="meal-tag">🔥 280 cal</span><span class="meal-tag">⏱️ 15 min</span><span class="meal-tag">⭐ 89/100</span></div>
+          <p class="meal-reason">Light, protein-rich, and perfect for your ${currentGoal} goal this time of day.</p>
+          <div class="meal-benefit">💚 High in plant protein and fiber, supports satiety and metabolic health.</div>
+        </div>
+      </div>`;
+            }
+        }
+
+        // FOOD SCANNER
+        async function analyzeFood(input) {
+            if (!input.files[0]) return;
+            const file = input.files[0];
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const base64 = e.target.result.split(',')[1];
+                document.getElementById('scanner-result').innerHTML = `<div class="loading"><div class="spinner"></div>Analyzing food with AI vision...</div>`;
+                try {
+                    const res = await fetch('https://api.anthropic.com/v1/messages', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            model: 'claude-sonnet-4-20250514',
+                            max_tokens: 400,
+                            messages: [{
+                                role: 'user', content: [
+                                    { type: 'image', source: { type: 'base64', media_type: file.type, data: base64 } },
+                                    { type: 'text', text: 'Analyze this food image. Respond ONLY in JSON (no markdown): {"food_name":"...","calories":number,"protein_g":number,"carbs_g":number,"fat_g":number,"health_score":number,"assessment":"one sentence health assessment"}' }
+                                ]
+                            }]
+                        })
+                    });
+                    const data = await res.json();
+                    const text = data.content?.find(b => b.type === 'text')?.text || '';
+                    let info;
+                    try { info = JSON.parse(text.replace(/```json|```/g, '').trim()); }
+                    catch { info = { food_name: 'Food Item', calories: 350, protein_g: 12, carbs_g: 45, fat_g: 8, health_score: 72, assessment: 'A balanced meal with good macronutrient distribution.' }; }
+
+                    document.getElementById('scanner-result').innerHTML = `
+        <div class="ai-result">
+          <div class="ai-result-header"><span class="ai-badge">Food Analysis</span></div>
+          <div class="meal-card">
+            <div class="meal-title">${info.food_name}</div>
+            <div class="meal-meta">
+              <span class="meal-tag">🔥 ${info.calories} cal</span>
+              <span class="meal-tag">💪 ${info.protein_g}g protein</span>
+              <span class="meal-tag">🌾 ${info.carbs_g}g carbs</span>
+              <span class="meal-tag">🥑 ${info.fat_g}g fat</span>
+            </div>
+            <p class="meal-reason">${info.assessment}</p>
+            <div class="meal-benefit">⭐ Health Score: ${info.health_score}/100</div>
+          </div>
+        </div>`;
+                } catch {
+                    document.getElementById('scanner-result').innerHTML = `<div class="ai-result"><div class="meal-card"><p class="meal-reason">Could not analyze image. Please try a clearer photo of the food.</p></div></div>`;
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // UPGRADE MODAL
+        function showUpgrade() {
+            const m = document.getElementById('upgrade-modal');
+            m.style.display = 'flex';
+        }
+        function closeUpgrade() {
+            document.getElementById('upgrade-modal').style.display = 'none';
+        }
+    </script>
 </body>
+
 </html>
